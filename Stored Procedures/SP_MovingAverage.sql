@@ -68,8 +68,18 @@ BEGIN
 
     check_movingaverage: LOOP
 		FETCH MovingAverage_CRSR INTO l_MovingAverageValue, l_ClosingPrice;
+        
+        IF ((l_MovingAverageValue IS NULL) OR
+			(l_ClosingPrice IS NULL))
+		THEN
+			SELECT 'IN NULL';
+			SET ValidPattern  = FALSE;
+			LEAVE check_movingaverage;
+        END IF;
+        
 		IF (finished = 1)
 		THEN
+			SELECT 'IN NULL';
 			LEAVE check_movingaverage;
 		END IF;
 
