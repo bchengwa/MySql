@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `main_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `main_db`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: main_db
@@ -24,27 +26,15 @@ DROP TABLE IF EXISTS `macd`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `macd` (
   `SYMBOL` varchar(20) NOT NULL,
-  `INTERVAL` varchar(20) NOT NULL,
-  `FASTPERIOD` int(11) NOT NULL,
-  `SLOWPERIOD` int(11) NOT NULL,
-  `SIGNALPERIOD` int(11) NOT NULL,
   `MACDDATE` date NOT NULL,
+  `MACDHISTOGRAM` decimal(10,2) NOT NULL,
+  `MACDSIGNAL` decimal(10,2) NOT NULL,
+  `MACDVALUE` decimal(10,2) NOT NULL,
   `LASTUPDATEDATE` datetime DEFAULT NULL,
-  PRIMARY KEY (`SYMBOL`,`INTERVAL`,`FASTPERIOD`,`SLOWPERIOD`,`SIGNALPERIOD`,`MACDDATE`),
-  KEY `MACD_INTERVAL_idx` (`INTERVAL`),
-  CONSTRAINT `MACD_INTERVAL` FOREIGN KEY (`INTERVAL`) REFERENCES `interval` (`interval`),
+  PRIMARY KEY (`SYMBOL`,`MACDDATE`),
   CONSTRAINT `MACD_SYMBOL` FOREIGN KEY (`SYMBOL`) REFERENCES `stock` (`symbol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `macd`
---
-
-LOCK TABLES `macd` WRITE;
-/*!40000 ALTER TABLE `macd` DISABLE KEYS */;
-/*!40000 ALTER TABLE `macd` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +45,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 14:29:52
+-- Dump completed on 2018-12-31 21:06:34

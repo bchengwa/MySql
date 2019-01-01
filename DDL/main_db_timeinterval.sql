@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `main_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `main_db`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: main_db
@@ -16,31 +18,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sector`
+-- Table structure for table `timeinterval`
 --
 
-DROP TABLE IF EXISTS `sector`;
+DROP TABLE IF EXISTS `timeinterval`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `sector` (
-  `SECTORNAME` varchar(20) NOT NULL,
-  `SECTORDESC` varchar(45) NOT NULL,
-  `LASTUPDATEID` varchar(45) NOT NULL,
-  `LASTUPDATEDATE` datetime NOT NULL,
-  PRIMARY KEY (`SECTORNAME`),
-  UNIQUE KEY `SECTORNAME_UNIQUE` (`SECTORNAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `timeinterval` (
+  `TIMEINTERVAL` varchar(20) NOT NULL,
+  `INTERVALDESCRIPTION` varchar(45) NOT NULL,
+  `LASTUPDATEDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`TIMEINTERVAL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Lis of all intervals and time periods used to perform queries';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sector`
---
-
-LOCK TABLES `sector` WRITE;
-/*!40000 ALTER TABLE `sector` DISABLE KEYS */;
-INSERT INTO `sector` VALUES ('COMMSVC','COMMUNICATION SERVICES','bchengwa','2018-11-20 18:53:57'),('CONSDIS','CONSUMER DISCRETIONARY','bchengwa','2018-11-20 18:53:58'),('CONSSTP','CONSUMER STAPLES','bchengwa','2018-11-20 18:53:57'),('ENERGY','ENERGY','bchengwa','2018-11-20 18:53:58'),('FINLS','FINANCIALS','bchengwa','2018-11-20 18:53:57'),('HC','HEALTH CARE','bchengwa','2018-11-20 18:53:57'),('INDTLS','INDUSTRIALS','bchengwa','2018-11-20 18:53:58'),('INFTECH','INFORMATION TECHNOLOGY','bchengwa','2018-11-20 18:53:58'),('MATERIALS','MATERIALS','bchengwa','2018-11-20 18:53:57'),('REALEST','REAL ESTATE','bchengwa','2018-11-20 18:53:57'),('UTIL','UTILITIES','bchengwa','2018-11-20 18:53:56');
-/*!40000 ALTER TABLE `sector` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 14:29:50
+-- Dump completed on 2018-12-31 21:06:33

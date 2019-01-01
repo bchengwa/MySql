@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `main_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `main_db`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: main_db
@@ -16,29 +18,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `interval`
+-- Table structure for table `movingaverageperiod`
 --
 
-DROP TABLE IF EXISTS `interval`;
+DROP TABLE IF EXISTS `movingaverageperiod`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `interval` (
-  `INTERVAL` varchar(20) NOT NULL,
-  `INTERVALDESCRIPTION` varchar(45) NOT NULL,
+CREATE TABLE `movingaverageperiod` (
+  `MOVINGAVERAGEPERIOD` int(11) NOT NULL,
+  `TIMEPERIODDESC` varchar(45) NOT NULL,
   `LASTUPDATEDATE` datetime DEFAULT NULL,
-  PRIMARY KEY (`INTERVAL`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Lis of all intervals and time periods used to perform queries';
+  PRIMARY KEY (`MOVINGAVERAGEPERIOD`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `interval`
---
-
-LOCK TABLES `interval` WRITE;
-/*!40000 ALTER TABLE `interval` DISABLE KEYS */;
-INSERT INTO `interval` VALUES ('DAILY','DAILY',NULL),('MONTHLY','MONTHLY',NULL),('WEEKLY','WEEKLY',NULL);
-/*!40000 ALTER TABLE `interval` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -49,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 14:29:51
+-- Dump completed on 2018-12-31 21:06:33

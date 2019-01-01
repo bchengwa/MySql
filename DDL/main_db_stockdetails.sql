@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `main_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `main_db`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: main_db
@@ -54,15 +56,6 @@ CREATE TABLE `stockdetails` (
   CONSTRAINT `SYMBOL` FOREIGN KEY (`SYMBOL`) REFERENCES `stock` (`symbol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `stockdetails`
---
-
-LOCK TABLES `stockdetails` WRITE;
-/*!40000 ALTER TABLE `stockdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stockdetails` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -73,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 14:29:51
+-- Dump completed on 2018-12-31 21:06:34

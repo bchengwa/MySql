@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `main_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `main_db`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: main_db
@@ -24,22 +26,15 @@ DROP TABLE IF EXISTS `sectorperformance`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `sectorperformance` (
   `SECTORNANME` varchar(20) NOT NULL,
-  `PERIOD` varchar(20) NOT NULL,
-  `PERFORMANCE` double DEFAULT NULL,
+  `TIMEINTERVAL` varchar(20) NOT NULL,
+  `PERFORMANCE` decimal(10,2) DEFAULT NULL,
   `LASTUPDATEDATE` date DEFAULT NULL,
-  PRIMARY KEY (`SECTORNANME`,`PERIOD`),
-  CONSTRAINT `SECTORNAME` FOREIGN KEY (`SECTORNANME`) REFERENCES `sector` (`sectorname`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  PRIMARY KEY (`SECTORNANME`,`TIMEINTERVAL`),
+  KEY `SP_TIMEINTERVAL_FK_idx` (`TIMEINTERVAL`),
+  CONSTRAINT `SECTORNAME` FOREIGN KEY (`SECTORNANME`) REFERENCES `sectors` (`sectorname`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `SP_TIMEINTERVAL_FK` FOREIGN KEY (`TIMEINTERVAL`) REFERENCES `timeinterval` (`timeinterval`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sectorperformance`
---
-
-LOCK TABLES `sectorperformance` WRITE;
-/*!40000 ALTER TABLE `sectorperformance` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sectorperformance` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -50,4 +45,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-26 14:29:53
+-- Dump completed on 2018-12-31 21:06:34
