@@ -9,7 +9,7 @@ CREATE PROCEDURE sp_MovingAverage
     IN AverageType  VARCHAR(20),    -- Type of moving average. Ex SMA, EMA, et
     IN timeInterval VARCHAR(20),    -- DAILY, WEEKLY, MONTHLY, etc
     IN Direction    VARCHAR(20),    -- From above (ABOVE) or below (BELOW)
-    IN TimePeriod   INT,            -- 10, 20, 50, 100, 200day moving averages
+    IN MAPeriod		INT,            -- 10, 20, 50, 100, 200day moving averages
     IN DaysBack     INT,            -- How many days back to check
     IN PriceDiff    FLOAT,          -- Diff. between MA and stock price
     OUT ValidPattern BOOLEAN     -- Cursor with list of stocks that match provided criteria
@@ -33,13 +33,13 @@ BEGIN
         AND MA.Symbol = StockSymbol
 		AND	MA.AverageType = AverageType
         AND MA.TimeInterval = timeInterval
-        AND MA.TimePeriod =  TimePeriod
+        AND MA.MovingAveragePeriod =  MAPeriod
         AND MA.MovingAverageDate > StartDate
         AND HP.ClosingDate > StartDate
         ORDER BY MA.MovingAverageDate ASC;
         
 	DECLARE CONTINUE HANDLER FOR
-    NOT FOUND SET finished = TRUE;
+    NOT FOUND SET finished = FALSE;
     
 	SET StartDate = CurrentDate - DaysBack;
     SET ValidPattern = 1;
@@ -57,7 +57,7 @@ BEGIN
 	IF ((StockSymbol IS NULL) OR
 		(AverageType IS NULL) OR
         (timeInterval IS NULL) OR
-        (TimePeriod IS NULL) OR
+        (MAPeriod IS NULL) OR
 		(DaysBack IS NULL) OR
         (Direction IS NULL))
     THEN
@@ -69,17 +69,8 @@ BEGIN
     check_movingaverage: LOOP
 		FETCH MovingAverage_CRSR INTO l_MovingAverageValue, l_ClosingPrice;
         
-        IF ((l_MovingAverageValue IS NULL) OR
-			(l_ClosingPrice IS NULL))
-		THEN
-			SELECT 'IN NULL';
-			SET ValidPattern  = FALSE;
-			LEAVE check_movingaverage;
-        END IF;
-        
 		IF (finished = 1)
 		THEN
-			SELECT 'IN NULL';
 			LEAVE check_movingaverage;
 		END IF;
 
@@ -87,16 +78,22 @@ BEGIN
 		THEN
 			IF (l_ClosingPrice > l_MovingAverageValue)
             THEN
+				LEAVE check_movingaverage;
 				SET ValidPattern  = FALSE;
+			ELSE
+				SET ValidPattern = TRUE;
 			END IF;
 		ELSE
 			IF (l_ClosingPrice < l_MovingAverageValue)
             THEN
+				LEAVE check_movingaverage;
 				SET ValidPattern  = FALSE;
+			ELSE
+            	SET ValidPattern  = TRUE;
 			END IF;
 		END IF;
     END LOOP check_movingaverage;
 
     CLOSE MovingAverage_CRSR;
 END //
-DELIMITER SP_Find_Stockssp_MovingAverage;
+DELIMITER ;
